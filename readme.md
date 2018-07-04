@@ -1,7 +1,11 @@
 # 说明
-1 只是测试模拟使用java spring注解，了解其原理
-2 服务端依赖swoole
-3 实现部分参考swoft，感谢!
+- 1 只是测试模拟使用java spring注解，了解其原理
+- 2 服务端依赖swoole
+- 3 实现部分参考swoft，感谢!
+# 自动加载
+```sh
+composer install --no-dev
+```
 # 创建和执行
 ```sh
 bin/wf create test
