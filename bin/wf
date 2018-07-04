@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+
+<?php
+
+define('ROOT_PATH', dirname(__DIR__));
+
+define('PRO_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'app');
+
+define('VENDOR_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'vendor');
+
+require VENDOR_PATH . DIRECTORY_SEPARATOR . 'autoload.php';
+
+Wf\Cli\ParseCmds::start();

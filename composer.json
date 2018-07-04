@@ -1,0 +1,27 @@
+{
+    "name": "wf",
+    "description": "the annotation framework",
+    "version": "1.0",
+    "require": {
+        "php": ">=7.0"
+    },
+    "authors": [
+        {
+            "name": "waited",
+            "email": "waitee@example.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Wf\\": "src/"
+        },
+        "files": [
+            "src/Core/Functions.php"
+        ]
+    },
+    "repositories": [
+        {
+            "packagist": false
+        }
+    ]
+}
