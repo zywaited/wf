@@ -1,7 +1,7 @@
 # 说明
 - 1 只是测试模拟使用java spring注解，了解其原理
 - 2 服务端依赖swoole
-- 3 实现部分参考swoft，感谢!
+- 3 部分实现参考swoft，感谢!
 # 自动加载
 ```sh
 composer install --no-dev
@@ -11,6 +11,11 @@ composer install --no-dev
 bin/wf create test
 bin/wf run test
 ```
+# 系统注解
+- @Annotation 声明一个注解
+- @Target 注解可用范围
+- @Alias 属性别名
+- @Repeat 注解可重复使用
 
 # 已实现注解
 - @Controller 标明控制器及路径
