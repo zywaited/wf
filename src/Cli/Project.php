@@ -30,11 +30,9 @@ class Project
     public const AUTOLOAD_FILES = 'autoload_files';
     public const AUTOLOAD_PATH = 'autoload_path';
     public const AUTOLOAD_CLASSMAP = 'autoload_classmap';
-    public static $projectName = '';
 
     public static function create(string $name): void
     {
-        self::$projectName = $name;
         Console::log(Console::INFO, "start to create {$name}");
         foreach (self::TREE as $dir) {
             mkdir(PRO_PATH . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . $dir, 0755, true);
@@ -102,6 +100,7 @@ CONFIG
         throw new \Exception('must be started from wf');
     }
     
+    define('APP_NAME', '$name');
     defined('APP_PATH') || define('APP_PATH', PRO_PATH . DIRECTORY_SEPARATOR . '$name');
     define('APP_SOURCE_PATH', APP_PATH . DIRECTORY_SEPARATOR . 'src');
     define('APP_CONFIG_PATH', APP_PATH . DIRECTORY_SEPARATOR . 'config');

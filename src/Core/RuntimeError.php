@@ -68,6 +68,6 @@ class RuntimeError
 
 	public static function shutdown(): void
 	{
-		Console::log(Console::WARNING, 'The server app is shutdowm[' . Project::$projectName . ']');
+		Console::log(Console::WARNING, 'The server app is shutdowm[' . APP_NAME . ']');
 	}
 }
