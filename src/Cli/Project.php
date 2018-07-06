@@ -4,6 +4,7 @@ namespace Wf\Cli;
 
 use Wf\Console;
 use Wf\Mime;
+use Wf\Core\Config;
 
 class Project
 {
@@ -71,15 +72,27 @@ return [
 ];
 NAMESPACES
             );
-             Console::log(Console::INFO, "create file[$file]");
+            Console::log(Console::INFO, "create file[$file]");
         }
     }
 
     protected static function createOtherFile(string $name): void
     {
+        $appConfigFile = self::CONFIG_USER . DIRECTORY_SEPARATOR .
+            Config::CONFIG_NAME . Mime::SEPARATOR . Mime::INI;
         file_put_contents(
-            PRO_PATH . DIRECTORY_SEPARATOR . $name  . DIRECTORY_SEPARATOR .
-                'public' . DIRECTORY_SEPARATOR . 'index.php',
+            PRO_PATH . DIRECTORY_SEPARATOR . $name .
+            DIRECTORY_SEPARATOR . $appConfigFile,
+            <<<CONFIG
+<?php
+return [
+];
+CONFIG
+        );
+        Console::log(Console::INFO, "create config[$appConfigFile]");
+        file_put_contents(
+            PRO_PATH . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR .
+            self::APP_PUBLIC . DIRECTORY_SEPARATOR . 'index.php',
             <<<INDEXFILE
 <?php
     /**

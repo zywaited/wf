@@ -25,9 +25,8 @@ class Normal extends Base
 			);
 			$handlerName = '__handler__';
 			// 函数覆盖
-			$methods = self::getMethodsTemplate($reflectionMethods, $handlerName);
+			$methods = $this->_getMethodsTemplate($reflectionMethods, $handlerName);
 			$template = <<<PROXYCLASS
-<?php
 namespace {$namespace};
 class {$proxyName} extends {$name}
 {
@@ -40,10 +39,10 @@ class {$proxyName} extends {$name}
 }
 PROXYCLASS;
 			if (APP_ENV == 'production') {
+                $template = '<?php' . PHP_EOL . $template;
 				file_put_contents($cacheFile, $template);
 				Functions::import($cacheFile);
 			} else {
-				$template = str_replace('<?php', '', $template);
 				eval($template);
 			}
 		}
@@ -52,7 +51,7 @@ PROXYCLASS;
 		return $proxyClass->newInstance($object);
 	}
 
-    private static function getMethodsTemplate(array $reflectionMethods, string $handlerPropertyName): string
+    private function _getMethodsTemplate(array $reflectionMethods, string $handlerPropertyName): string
     {
         $template = '';
         foreach ($reflectionMethods as $reflectionMethod) {
@@ -61,7 +60,7 @@ PROXYCLASS;
                 continue;
             }
 
-            $methodParameters = self::getParameterTemplate($reflectionMethod);
+            $methodParameters = $this->_getParameterTemplate($reflectionMethod);
             $reflectionMethodReturn = $reflectionMethod->getReturnType();
             $returnType = '';
             if ($reflectionMethodReturn !== null) {
@@ -82,7 +81,7 @@ METHOD;
         return $template;
     }
 
-    private static function getParameterTemplate(\ReflectionMethod $reflectionMethod): string
+    private function _getParameterTemplate(\ReflectionMethod $reflectionMethod): string
     {
         $template = '';
         $reflectionParameters = $reflectionMethod->getParameters();
@@ -105,7 +104,7 @@ METHOD;
             }
 
             if ($reflectionParameter->isOptional() && $reflectionParameter->isVariadic() === false) {
-                $template .= self::getParameterDefaultValue($reflectionParameter);
+                $template .= $this->_getParameterDefaultValue($reflectionParameter);
             }
 
             if ($paramCount !== 0) {
@@ -116,7 +115,7 @@ METHOD;
         return $template;
     }
 
-    private static function getParameterDefaultValue(\ReflectionParameter $reflectionParameter): string
+    private function _getParameterDefaultValue(\ReflectionParameter $reflectionParameter): string
     {
         $template = '';
         $defaultValue = $reflectionParameter->getDefaultValue();
