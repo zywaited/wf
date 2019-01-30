@@ -81,11 +81,7 @@ NAMESPACES
         file_put_contents(
             PRO_PATH . DIRECTORY_SEPARATOR . $name .
             DIRECTORY_SEPARATOR . $appConfigFile,
-            <<<CONFIG
-<?php
-return [
-];
-CONFIG
+            ''
         );
         Console::log(Console::INFO, "create config[$appConfigFile]");
         file_put_contents(
